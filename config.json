@@ -1,0 +1,11 @@
+{   
+
+    "fileBlacklist": [
+        "DumpStack.log.tmp",
+        "hiberfil.sys",
+        "pagefile.sys",
+        "Recovery",
+        "swapfile.sys",
+        "System Volume Information"
+    ]
+}
