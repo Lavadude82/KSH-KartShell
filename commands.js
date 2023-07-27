@@ -62,14 +62,29 @@ const cmds = [
     }
   },
   {
-    name:"run",
+    name:"sh",
     callback:async(params)=>{
-      let file = params[0]
-      if(file.startsWith("/",0)){
-      exec(`bash ${file}`)
-      }else{
-        exec(`bash ${cwd() + file}`)
+      let file = params[0];
+      if(file == ""){
+        return console.log("No File Specified!");
       }
+      let sws = false;
+      try{
+        sws = file.startsWith("/",0);
+      }catch(error){
+        console.log("File Does Not Exist!")
+      }
+      let cmd;
+      if(sws){
+      cmd = exec(`sh ${file}`)
+
+      }else{
+      cmd = exec(`sh ${cwd() + file}`)
+      }
+
+      cmd.stdout.on("data",(e)=>{
+        console.log(e);
+      })
     }
   },
   {
