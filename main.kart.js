@@ -3,7 +3,7 @@ const clc = require("cli-color")
 const fs = require("fs");
 const { cmds } = require("./commands"); // Import path from the commands module
 
-let decor = "\\ - $ ";
+let decor = " - $ ";
 console.clear();
 console.log(
   `\n<Kart> Shell - Open Source KSH${clc.redBright('\n\nYOU MAY NOT DISTRIBUTE THIS AT COST!\nTHIS IS FREE AND OPEN-SOURCE!')}`
