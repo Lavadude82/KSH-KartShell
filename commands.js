@@ -1,13 +1,52 @@
 const { cwd } = require("process");
 const { exec } = require("child_process");
 const clc = require("cli-color");
-const { readdirSync, statSync } = require("fs");
+const { readdirSync, statSync, readFileSync, writeFileSync } = require("fs");
 const { error } = require("console");
+function UpdateConfigValue(path, property, value) {
+  let data = JSON.parse(readFileSync(path, "utf-8"));
+  data[property] = value;
+  writeFileSync(path, JSON.stringify(data, null, 2));
+}
 const cmds = [
   {
+    name: "config",
+    callback: async (params) => {
+      if (params[0] == "-sm") {
+        UpdateConfigValue(
+          __dirname + "/config.json",
+          "print_default",
+          params[1] == "true"
+        );
+      }
+      if (params[0] == "-td") {
+        params.splice(0, 1);
+        if (params[0] == "$td.def") {
+          UpdateConfigValue(
+            __dirname + "/config.json",
+            "print_decoration",
+            "\ -\ $\ "
+          );
+        } else {
+          UpdateConfigValue(
+            __dirname + "/config.json",
+            "print_decoration",
+            " " + params.join(" ") + " "
+          );
+        }
+      }
+    },
+  },
+  {
     name: "exit",
-    callback: async () => {
-      console.clear();
+    callback: async (params) => {
+      if (params[0] == "--help" || params[0] == "-h") {
+        console.log(`--keep or -k : Keeps the terminal`);
+        return;
+      }
+      if (params[0] == "--keep") {
+        console.clear();
+      }
       process.exit();
     },
   },
@@ -37,7 +76,6 @@ const cmds = [
         console.log(clc.yellow("W:"), "No Directory!");
         return;
       }
-      
 
       let directoryPath = params[0].split("");
       let dir = "";
@@ -96,7 +134,7 @@ const cmds = [
         } catch (err) {}
         const width = process.stdout.columns || defaultColumns;
 
-        if (str.length + e.length > width - 1) {
+        if (str.length + e.length + 2 > width) {
           console.log(str);
           str = "";
         }

@@ -1,11 +1,4 @@
-{   
-
-    "fileBlacklist": [
-        "DumpStack.log.tmp",
-        "hiberfil.sys",
-        "pagefile.sys",
-        "Recovery",
-        "swapfile.sys",
-        "System Volume Information"
-    ]
+{
+  "print_default": false,
+  "print_decoration": " - $ "
 }
