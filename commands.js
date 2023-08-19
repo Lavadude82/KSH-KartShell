@@ -147,15 +147,6 @@ const cmds = [
       console.log(str);
     },
   },
-  {
-    name: "exec",
-    callback: (params) => {
-      if(params[0] == ""){
-        return console.log(clc.yellow("W:"),"File Does Not Exist")
-      }
-      exec("./" + params[0]);
-    },
-  },
 ];
 
 module.exports = {
