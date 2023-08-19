@@ -1,0 +1,17 @@
+{
+  "dependencies": {
+    "cli-color": "^2.0.3",
+    "fs": "^0.0.1-security",
+    "readline-sync": "^1.4.10"
+  },
+  "name": "ksh-kartshell",
+  "description": "Custom simple terminal that can do simple tasks",
+  "version": "1.0.0",
+  "main": "main.kart.js",
+  "scripts": {
+    "start": "node main.kart.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
